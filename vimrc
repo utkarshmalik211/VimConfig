@@ -14,10 +14,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tomasiser/vim-code-dark'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'tpope/vim-surround'
 Plugin 'Yggdroot/indentLine'
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -29,6 +27,10 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+noremap <C-t><up> :tabr<cr>
+noremap <C-t><down> :tabl<cr>
+noremap <C-t><left> :tabp<cr>
+noremap <C-t><right> :tabn<cr>
 " Remove arrow keys functionality
 noremap <Right> <Nop>
 noremap <Left> <Nop>
@@ -44,26 +46,16 @@ inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
-colorscheme codedark
+colorscheme gruvbox
 
 " airline configs
 let g:airline_powerline_fonts = 1
-let g:airline_theme='powerlineish'
+let g:airline_theme='gruvbox'
 let g:airline#extensions#tabline#enabled = 1
 set clipboard=unnamed
+set background=dark    " Setting dark mode
 
-
-let t:is_transparent = 0
-function! Toggle_transparent()
-    if t:is_transparent == 0
-        hi Normal guibg=NONE ctermbg=NONE
-        let t:is_transparent = 1
-    else
-        set background=dark
-        let t:is_tranparent = 0
-    endif
-endfunction
-nnoremap <C-t> : call Toggle_transparent()<CR>
+hi Normal ctermbg=none
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
